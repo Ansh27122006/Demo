@@ -1,0 +1,25 @@
+name: Deploy HTML/CSS/JS to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # or master, depending on your branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js (optional, if you need npm build steps)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # or any version you prefer
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./  # publish from root (where your index.html is)
